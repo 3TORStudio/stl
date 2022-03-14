@@ -37,7 +37,7 @@ bool badCharTest(const std::string &);
 bool badFormatTest(const std::string &);
 
 //deleting spaces
-std::string parsingInput(std::string &);
+std::string clearingSpaces(std::string &);
 
 mathExpresion extracting(const std::string &);
                 

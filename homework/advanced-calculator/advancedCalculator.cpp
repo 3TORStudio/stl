@@ -63,11 +63,6 @@ bool badFormatTest(const std::string & s){
     return true;
   }
   
-  //double operator, example:  1 +/ 2
-//   char secondOper = *std::next(std::find_if(std::next(s.begin()), s.end(), isOperation));
-//   if(secondOper != '-' && !isdigit(secondOper)){
-//     return true;
-//   }
   auto op = std::find_if(std::next(s.begin()),s.end(), isOperation);
   char secondOp {};
   if(*op != '!'){
@@ -79,19 +74,16 @@ bool badFormatTest(const std::string & s){
   }
   
   //too many arguments
- 
   if(std::count_if(std::next(s.begin()),s.end(),isOperation) > 1 && secondOp != '-'){
     std::cout << "too many arguments\n";
     return true;
   }
-  // if(std::ispunct(*std::next(std::find_if(std::next(s.begin()), s.end(), isOperation)))){
-  //   return true;
-  // }
   
   //wrong format with factorial, example: 1!2
   if(std::any_of(s.begin(),s.end(),[](char c){return c == '!';}) && std::isdigit(s.back())){
     return true;
   }
+
   //wrong last character, example 1+
   if(std::ispunct(s.back()) && s.back() != '!'){
     return true;
@@ -99,7 +91,7 @@ bool badFormatTest(const std::string & s){
   return false;
 }
 
-std::string parsingInput(std::string & s){
+std::string clearingSpaces(std::string & s){
   auto dSpaces = [](std::string r, const char c){
     return std::isspace(c) ? r : r += c;
   };
@@ -132,7 +124,7 @@ mathExpresion extracting(const std::string & s){
 }
 
 ErrorCode process(std::string input, double* out){
-  input = parsingInput(input);
+  input = clearingSpaces(input);
 
   if(badCharTest(input)){
     return ErrorCode::BadCharacter;
