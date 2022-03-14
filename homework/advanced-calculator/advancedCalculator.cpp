@@ -155,9 +155,9 @@ ErrorCode process(std::string input, double* out){
 }
 
 bool requestForQuit(std::string & s){
-  s = parsingInput(s);
+  s = clearingSpaces(s);
   std::transform(s.begin(), s.end(), s.begin(),
-                   [](unsigned char c) -> unsigned char { return std::tolower(c); });
+                   [](unsigned char c) -> unsigned char {return std::tolower(c); });
   if(s == "quit"){
     return false;
   }
